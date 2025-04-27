@@ -9,13 +9,13 @@ scaler = joblib.load('weights/scaler/scaler.pkl')
 
 # Define feature names (excluding the label 'fraud')
 FEATURE_NAMES = [
-    'distance_from_home',
-    'distance_from_last_transaction',
-    'ratio_to_median_purchase_price',
-    'repeat_retailer',
-    'used_chip',
-    'used_pin_number',
-    'online_order'
+'distance_from_home',
+'distance_from_last_transaction',
+'ratio_to_median_purchase_price',
+'repeat_retailer',
+'used_chip',
+'used_pin_number',
+'online_order'
 ]
 
 
@@ -27,25 +27,29 @@ def predict_transaction(distance_from_home, distance_from_last_transaction, rati
         distance_from_last_transaction = float(distance_from_last_transaction)
         ratio_to_median_purchase_price = float(ratio_to_median_purchase_price)
 
-        if distance_from_home <= 0:
+        if distance_from_home < 0:
             return {
                 "status": "error",
-                "message": "❌ Distance from home must be positive!"
+                "message": "❌ Distance from home must be positive!",
+                "details": "Reenter the distance from home."
             }
-        if distance_from_last_transaction <= 0:
+        if distance_from_last_transaction < 0:
             return {
                 "status": "error",
-                "message": "❌ Distance from last transaction must be positive!"
+                "message": "❌ Distance from last transaction must be positive!",
+                "details": "Reenter the distance from last transaction."
             }
-        if ratio_to_median_purchase_price <= 0:
+        if ratio_to_median_purchase_price < 0:
             return {
                 "status": "error",
-                "message": "❌ Ratio to median price must be positive!"
+                "message": "❌ Ratio to median price must be positive!",
+                "details": "Reenter the ratio to median price."
             }
     except ValueError:
         return {
             "status": "error",
-            "message": "❌ Enter valid numbers for distances and ratio!"
+            "message": "❌ Enter valid numbers for distances and ratio!",
+            "details": "Enter valid numbers for distances and ratio."
         }
 
     # Map Yes/No to 1/0
@@ -62,10 +66,11 @@ def predict_transaction(distance_from_home, distance_from_last_transaction, rati
 
     # Scale features
     features_scaled = scaler.transform(features)
+    features_scaled=pd.DataFrame(features_scaled, columns=FEATURE_NAMES)
 
     # Predict
     prediction = model.predict(features_scaled)[0]
-
+    print(prediction)
     # Format output
     if prediction == 0:
         return {
@@ -99,19 +104,19 @@ with gr.Blocks(theme=gr.themes.Default()) as interface:
         distance_from_home = gr.Number(
             label="Distance from Home (km)",
             precision=2,
-            minimum=0.01,
+            minimum=0,
             value=0
         )
         distance_from_last_transaction = gr.Number(
             label="Distance from Last (km)",
             precision=2,
-            minimum=0.01,
+            minimum=0,
             value=0
         )
         ratio_to_median_purchase_price = gr.Number(
             label="Ratio to Median Price",
             precision=2,
-            minimum=0.01,
+            minimum=0,
             value=0
         )
         repeat_retailer = gr.Dropdown(
