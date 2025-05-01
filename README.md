@@ -15,7 +15,7 @@ This project aims to predict fraudulent use of credit card based on the usage pa
 
 ```plaintext
 credit_card_fraud_detection/
-├── assets/                          # Visualizations, charts, exported models
+├── assets/                          # Visualizations, charts, for data
 │   └── figures/
 │
 ├── data/                            # Raw and processed data
@@ -27,7 +27,8 @@ credit_card_fraud_detection/
 ├── src/                       # Step-by-step development notebooks
 │   ├── preprocessing.ipynb
 │   ├── model_train.ipynb
-│   └── main.py               #code for deploying the model in local system
+│   ├── main.py               #code for deploying the model in local system
+│   └── clean.py              #code to clean the outputs
 │
 ├── weights/                            
 │   ├── models/                         #model weights
@@ -35,6 +36,8 @@ credit_card_fraud_detection/
 │
 ├── reports/                            
 │   └── figures/                         #model performance metrics
+│
+├── logs                             #logs   
 │
 ├── README.md                        # Project documentation
 ├── LICENSE                          # MIT License
@@ -91,6 +94,9 @@ credit_card_fraud_detection/
 - Scale the input and run inferences
 - Make it accessible publicly
 
+### clean.py
+- Code to clean up the work space.
+
 ---
 
 ## Key Skills Demonstrated
@@ -121,8 +127,21 @@ git clone https://github.com/ran-extern/credit_card_fraud_detection
 cd credit_card_fraud_detection
 pip install -r requirements.txt
 ```
+- Run `preprocessing.ipynb` and `model_train.ipynb` in order.
 - Run `main.py` from the project root folder
 - It is highly advisable to use python virtual environment
+---
+
+## Output Demo
+
+Below is the sample output.
+
+<p align="center">
+    <img src="assets/output/output.png" alt="Output" width="100%">
+</p>
+
+- **Output**
+
 ---
 
 ## Author
