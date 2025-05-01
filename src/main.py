@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 # Load model and scaler
-model = joblib.load('weights/models/random_forest_model.pkl')
+model = joblib.load('weights/models/best_model_random_forest.pkl')
 scaler = joblib.load('weights/scaler/scaler.pkl')
 
 # Define feature names (excluding the label 'fraud')

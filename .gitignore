@@ -2,4 +2,11 @@ venv
 .env
 .idea
 .gradio
+*.
+*.png
+*.log
+*.pkl
 *.csv
+*.txt
+!requirements.txt
+!output.png
