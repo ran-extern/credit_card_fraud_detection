@@ -8,5 +8,6 @@ venv
 *.pkl
 *.csv
 *.txt
+*.csv#
 !requirements.txt
 !output.png
